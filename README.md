@@ -1,1 +1,3 @@
-# hpc_ssh_config
+# SMU HPC SSH Configuration
+
+

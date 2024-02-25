@@ -1,0 +1,20 @@
+Match Host m3 !Exec "~/.ssh/smu_hpc_ssh/connect.sh test m3.smu.edu 22"
+  ProxyCommand ~/.ssh/smu_hpc_ssh/connect.sh jump %h %p
+Match Host mp !Exec "~/.ssh/smu_hpc_ssh/connect.sh test superpod.smu.edu 22"
+  ProxyCommand ~/.ssh/smu_hpc_ssh/connect.sh jump %h %p
+Host m3
+  HostName m3.smu.edu
+  ForwardX11 yes
+  ForwardX11Trusted yes
+Host mp
+  HostName superpod.smu.edu
+Host m3 mp hpc_bastion
+  Compression yes
+  TCPKeepAlive yes
+  ServerAliveInterval 120
+  ServerAliveCountMax 10
+  ControlMaster auto
+  ControlPath ~/.ssh/sockets/ssh_mux_%C
+  ControlPersist 600
+  IdentitiesOnly yes
+Include ~/.ssh/smu_hpc_ssh/user_config
