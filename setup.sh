@@ -34,8 +34,8 @@ configuration scripts to your computer.\n\nNote that if something goes wrong
 during the setup process you can simply restart this script to try again.\n\n"
 
 proceed
-
 test -d ~/.ssh && chmod u+rwx ~/.ssh || mkdir ~/.ssh
+test ! -d ~/.ssh/sockets && mkdir ~/.ssh/sockets
 test -e ~/.ssh/config && chmod u+rw ~/.ssh/config
 
 printf "Include ~/.ssh/smu_hpc_ssh/config\n" >> ~/.ssh/config
