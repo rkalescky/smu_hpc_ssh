@@ -12,7 +12,8 @@ files contained in `~/.ssh/smu_hpc_ssh`.
 Note that if something goes wrong during the setup process you can simply
 restart this script to try again.
 
-Let's begin by copying and pasting the command below into your terminal.
+Let's begin by copying and pasting the command below into a terminal on your
+own computer, i.e. not logged into M3 nor the NVIDIA SuperPOD (MP).
 
 ```
 curl -fsSL https://raw.githubusercontent.com/SouthernMethodistUniversity/smu_hpc_ssh/main/setup.sh | sh
