@@ -38,7 +38,10 @@ test -d ~/.ssh && chmod u+rwx ~/.ssh || mkdir ~/.ssh
 test ! -d ~/.ssh/sockets && mkdir ~/.ssh/sockets
 test -e ~/.ssh/config && chmod u+rw ~/.ssh/config
 
-printf "Include ~/.ssh/smu_hpc_ssh/config\n" >> ~/.ssh/config
+if ! grep -q "Include ~/.ssh/smu_hpc_ssh/config" ~/.ssh/config; then
+  printf "Include ~/.ssh/smu_hpc_ssh/config\n" >> ~/.ssh/config
+fi
+
 
 test -d ~/.ssh/smu_hpc_ssh && rm -rf ~/.ssh/smu_hpc_ssh
 git clone https://github.com/SouthernMethodistUniversity/smu_hpc_ssh.git\
