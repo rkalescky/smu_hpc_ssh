@@ -39,7 +39,7 @@ test ! -d ~/.ssh/sockets && mkdir ~/.ssh/sockets
 test -e ~/.ssh/config && chmod u+rw ~/.ssh/config
 
 if ! grep -q "Include ~/.ssh/smu_hpc_ssh/config" ~/.ssh/config; then
-  printf "Include ~/.ssh/smu_hpc_ssh/config\n" >> ~/.ssh/config
+  printf "Include ~/.ssh/smu_hpc_ssh/config\n$(cat ~/.ssh/config)" > ~/.ssh/config
 fi
 
 
