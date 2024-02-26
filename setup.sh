@@ -40,6 +40,7 @@ test -e ~/.ssh/config && chmod u+rw ~/.ssh/config
 
 printf "Include ~/.ssh/smu_hpc_ssh/config\n" >> ~/.ssh/config
 
+test -d ~/.ssh/smu_hpc_ssh && rm -rf ~/.ssh/smu_hpc_ssh
 git clone https://github.com/SouthernMethodistUniversity/smu_hpc_ssh.git\
  ~/.ssh/smu_hpc_ssh
 
@@ -77,6 +78,7 @@ if [ `uname -s` = "Darwin" ]; then
   ssh-add --apple-use-keychain ~/.ssh/smu_hpc_ssh/id_ecdsa_smu_hpc
 else
   printf "AddKeysToAgent yes" >> ~/.ssh/smu_hpc_ssh/user_config
+  eval "`ssh-agent -s`"
   ssh-add -k ~/.ssh/smu_hpc_ssh/id_ecdsa_smu_hpc
 fi
 
