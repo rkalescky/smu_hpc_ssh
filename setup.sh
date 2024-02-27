@@ -34,14 +34,17 @@ configuration scripts to your computer.\n\nNote that if something goes wrong
 during the setup process you can simply restart this script to try again.\n\n"
 
 proceed
-
 test -d ~/.ssh && chmod u+rwx ~/.ssh || mkdir ~/.ssh
+test ! -d ~/.ssh/sockets && mkdir ~/.ssh/sockets
 test -e ~/.ssh/config && chmod u+rw ~/.ssh/config
 
-printf "Include ~/.ssh/smu_hpc_ssh/config\n" >> ~/.ssh/config
+config_include="Include ~/.ssh/smu_hpc_ssh/config"
+if ! grep -q $config_include ~/.ssh/config; then
+  printf "%s\n%s" "$config_include" "`cat ~/.ssh/config`" > ~/.ssh/config
+fi
 
-test -d ~/.ssh/smu_hpc_ssh && rm -rf ~/.ssh/smu_hpc_ssh
-git clone https://github.com/SouthernMethodistUniversity/smu_hpc_ssh.git\
+test -d ~/.ssh/smu_hpc_ssh && git -C ~/.ssh/smu_hpc_ssh pull ||\
+ git clone https://github.com/SouthernMethodistUniversity/smu_hpc_ssh.git\
  ~/.ssh/smu_hpc_ssh
 
 print_wrap "\n\nNext we'll make an SSH key for use with M3, MP, and the bastion
@@ -93,7 +96,7 @@ copy_keys "2. Bastion Host #2" $username "sjump7ap02.smu.edu"
 copy_keys "3. M3" $username "m3"
 copy_keys "4. NVIDIA SuperPOD (MP)" $username "mp"
 
-print_wrap "\n\nCongradulations! You successfully setup your SSH config to be able
-to access M3 and MP via SSH. You can now log into either system using \`ssh
-m3\` and \`ssh mp\` without needing to use the SMU VPN.\n\n"
+print_wrap "\n\nCongradulations! You successfully setup your SSH config to be
+able to access M3 and MP via SSH. You can now log into either system using
+\`ssh m3\` and \`ssh mp\` without needing to use the SMU VPN.\n\n"
 
