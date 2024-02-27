@@ -2,7 +2,33 @@
 
 set -e
 
+if ! type git &> /dev/null; then
+  echo "Please install git."
+  case `uname -s` in
+    Darwin)
+      echo "The recommended installation method is via Homebrew, which will
+      also isntall git.\n\nSee https://brew.sh for installation instructions."\
+      | fold -s -w 80
+      ;;
+    Linux)
+      echo "The recommended installation method is via your distribution's
+      package manager." | fold -s -w 80
+      ;;
+  esac
+  exit
+fi
 
+if ! type ssh &> /dev/null || ! type ssh-keygen &> /dev/null ||\
+  ! type ssh-add &> /dev/null; then
+  echo "Please install SSH."
+  case `uname -s` in
+    Linux)
+      echo "The recommended installation method is via your distribution's
+      package manager." | fold -s -w 80
+      ;;
+  esac
+  exit
+fi
 
 print_wrap() {
   clear
