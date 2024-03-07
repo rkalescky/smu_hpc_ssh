@@ -106,11 +106,11 @@ don't need to repeatedly enter the key's password.\n\n"
 proceed
 
 if [ `uname -s` = "Darwin" ]; then
-  printf "  UseKeychain yes\n  AddKeysToAgent no"\
+  printf "  UseKeychain yes\n  AddKeysToAgent no\n"\
     >> ~/.ssh/smu_hpc_ssh/user_config
   ssh-add --apple-use-keychain ~/.ssh/smu_hpc_ssh/id_ecdsa_smu_hpc
 else
-  printf "  AddKeysToAgent yes" >> ~/.ssh/smu_hpc_ssh/user_config
+  printf "  AddKeysToAgent yes\n" >> ~/.ssh/smu_hpc_ssh/user_config
   eval "`ssh-agent -s`"
   ssh-add -k ~/.ssh/smu_hpc_ssh/id_ecdsa_smu_hpc
 fi
