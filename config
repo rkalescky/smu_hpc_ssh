@@ -1,3 +1,4 @@
+Include ~/.ssh/smu_hpc_ssh/user_config
 Match Host m3 !Exec "~/.ssh/smu_hpc_ssh/connect.sh test m3.smu.edu 22"
   ProxyCommand ~/.ssh/smu_hpc_ssh/connect.sh jump %h %p
 Match Host mp !Exec "~/.ssh/smu_hpc_ssh/connect.sh test superpod.smu.edu 22"
@@ -17,4 +18,4 @@ Host m3 mp hpc_bastion
   ControlPath ~/.ssh/sockets/ssh_mux_%C
   ControlPersist 600
   IdentitiesOnly yes
-Include ~/.ssh/smu_hpc_ssh/user_config
+
